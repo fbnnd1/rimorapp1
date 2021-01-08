@@ -1,0 +1,107 @@
+/*
+.div-container-mapa {
+    padding-bottom: 2em;
+}
+*/
+
+.fundo-branco {
+    background-color:white;
+}
+
+.cabecalho-paineis {
+    font-weight:bold;
+    text-align:center;
+}
+
+.sumario-secoes {
+    border: 0px solid black;
+    margin:1em;
+}
+
+.sumario-cab {
+    font-weight:bold;
+    text-align:center;
+}
+
+.sumario-valor{
+    text-align:center;
+}
+
+/*Responsividade sumário*/
+@media (min-width:670px) {
+    .sumario-div {
+
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        border: 0px solid black;
+        margin:1em;
+    }
+}
+
+#div_jogadores {
+    display: none;
+}
+
+.painel-mapa {
+    padding-top: 1em;
+}
+
+.div-botoes-mapa {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#div_mapa { 
+    border:1px solid black;
+    position:relative;
+    width:100%;
+    height:200px;
+ }
+
+ #div-dica {
+     font-size: 14pt;
+     font-family: Arial;
+ }
+
+ #div_desc_mapa {
+    font-size: 12pt;
+    font-family: Arial;
+ }
+
+ .estilo-texto1{
+     font-weight:bold;
+ }
+
+ .paine1 {
+    margin-bottom:1em;
+ }
+
+/*Cursor que marca lugar*/
+ .marca-lugar {
+     cursor: crosshair;
+ }
+
+.destaque-ranking {
+    font-weight:bold;
+}
+
+/*Botões sobre e dicas e lugar*/
+#btn_mostra_dica, #btn_exb_lugares, #btn_limpa_msg_ranking, #div_modelo {
+    display:none;
+}
+
+.div_caixa_magia4 {
+    border: 1px solid #31708f;
+}
+
+.div_magia4 {
+    background-color: #d9edf7;
+
+    font-weight:bold;
+    text-align:center;
+
+    width:100%;
+}

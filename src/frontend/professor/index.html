@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="Fábio N. N. D.">
+		<!-- Bootstrap e JQuery
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		
+		-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<!-- Scripts e Estilos locais -->
+		<link rel="stylesheet" href="estilo/index.css">
+		<script src="../scriptsComuns/config.js"></script>
+		<script src="../scriptsComuns/utilidades.js"></script>
+		<script src="../scriptsComuns/Usuario.js"></script>
+        <script src="../scriptsComuns/Educador.js"></script>
+		<script src="script/index.js"></script>
+
+		<title>Rimor App</title>
+	</head>
+	<body class="">
+		
+		<div class="container">
+			<h1>Rimor App</h1>
+			<br />
+			<!-- Login -->
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+				  <h4 class="panel-title cabecalho-forms" id="h4_edu_login">
+					Educador, clique aqui para fazer o login
+				  </h4>
+				</div>
+				<div id="div_frm_edu_login" style="display: none;">
+				  <div class="panel-body">
+					<form action="" id="frm_login_edu">
+						<div class="form-group">
+						  <label for="frm_usuario">Usuário:</label>
+						  <input type="text" class="form-control" id="frm_usuario" pattern="[A-z0-9]{1,20}" title="Digite seu usuário usando apenas caracteres alfanuméricos" required/>
+						</div>
+						<div class="form-group">
+						  <label for="frm_senha">Senha:</label>
+						  <input type="password" class="form-control" id="frm_senha" pattern="[\w\s]{1,20}" title="Digite sua senha usando apenas caracteres alfanuméricos" required/>
+						</div>
+						<button type="button" class="btn btn-success" id="btn_login">Entrar &gt;&gt;</button>
+					</form> 
+
+				  </div>
+				</div>
+			</div>
+			<!-- Recupera Senha -->
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+				  <h4 class="panel-title cabecalho-forms" id="h4_edu_recup_senha">
+					Educador, clique aqui para alterar senha
+				  </h4>
+				</div>
+				<div id="div_frm_recup_senha" style="display: none;" >
+				  	<div class="panel-body">
+						<form action="" id="frm_recup_senha">
+							<div class="form-group">
+								<label for="frm_recup_senha_usuario">Usuário:</label>
+								<input type="text" class="form-control" id="frm_recup_senha_usuario" pattern="[A-z0-9]{1,20}" title="Digite seu usuário usando apenas caracteres alfanuméricos" required/>
+							</div>
+							<button type="button" class="btn btn-success" id="btn_recup_senha_checa_usuario">Validar Usuário</button>
+							<div id="div_cad_nova_senha" class="form-group">
+								<label for="frm_recup_senha1">Nova Senha:</label>
+								<input type="password" class="form-control" id="frm_recup_senha1" pattern="[\w\s]{1,20}" title="Digite sua senha usando apenas caracteres alfanuméricos" required/>
+								<label for="frm_recup_senha2">Informe novamente a Senha:</label>
+								<input type="password" class="form-control" id="frm_recup_senha2" pattern="[\w\s]{1,20}" title="Digite sua senha novamente usando apenas caracteres alfanuméricos" required/>
+							</div>
+							<button type="button" class="btn btn-success" id="btn_recup_cad_senha">Cadastrar Nova Senha</button>
+						</form> 
+					</div>
+				</div>
+			</div>
+			<!-- Cadastro -->
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+				  <h4 class="panel-title cabecalho-forms" id="h4_edu_cad">
+					Educador, clique aqui para fazer seu cadastro
+				  </h4>
+				</div>
+				<div id="div_frm_cad" style="display: none;" >
+				  	<div class="panel-body">
+						<form action="" id="frm_edu_cad">
+							<div class="form-group">
+								<label for="frm_cad_edu_nome">Nome Completo:</label>
+								<input type="text" class="form-control" id="frm_cad_edu_nome" title="Digite seu nome completo" required min="5" max="100" />
+							</div>
+							<div class="form-group">
+								<label for="frm_cad_edu_email">E-mail:</label>
+								<input type="email" class="form-control" id="frm_cad_edu_email" pattern="^[a-z]+[a-z0-9\._\-]+[a-z0-9]{1,}@[a-z0-9\.\-]+\.[a-z]{2,}$" title="Digite seu endereço de e-mail" required max="100" />
+							</div>
+							<div class="form-group">
+							  <label for="frm_cad_edu_usuario">Usuário:</label>
+							  <input type="text" class="form-control" id="frm_cad_edu_usuario" pattern="[A-z0-9]{1,20}" title="Digite seu usuário usando apenas caracteres alfanuméricos" required/>
+							</div>
+							<div class="form-group">
+							  <label for="frm_cad_edu_senha1">Senha:</label>
+							  <input type="password" class="form-control" id="frm_cad_edu_senha1" pattern="[\w\s]{1,20}" title="Digite sua senha" required/>
+							</div>
+							<div class="form-group">
+								<label for="frm_cad_edu_senha2">Confirme a senha:</label>
+								<input type="password" class="form-control" id="frm_cad_edu_senha2" pattern="[\w\s]{1,20}" title="Confirme sua senha" required/>
+							</div>
+							<div class="form-group">
+								<label for="frm_cad_edu_txt_termo">Termo de Responsabiliddade de Uso:</label>
+															<textarea class="form-control" readonly id="frm_cad_edu_txt_termo">
+TERMO DE RESPONSABILIDADE DE USO
+	
+O Senhor(a), por meio deste documento declara se responsabilizar pelo uso do Software Rimor obedecendo as seguintes condições:
+	
+- Uso do software para finalidades exclusivamente educacionais;
+	
+- Usar o software conforme a legislação nacional vigente,
+	
+Ainda o senhor(a) isenta o autor de quaisquer prejuízos decorridos do uso indevido do software.
+
+Política de Privacidade
+
+As informações pessoais informadas são guardadas apenas para fins de cadastro. Elas não serão para outras finalidades.
+
+Nota:
+
+Essas informações poderão ser compartilhadas com órgãos governamentais se houver determinação judicial.
+
+O SOFTWARE É FORNECIDO "TAL COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU IMPLÍCITA, INCLUINDO, MAS NÃO SE LIMITANDO A GARANTIAS DE COMERCIALIZAÇÃO, ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA E NÃO INFRAÇÃO. EM NENHUM CASO OS AUTORES OU TITULARES DOS DIREITOS AUTORAIS RESPONSABILIZARÃO POR QUAISQUER RECLAMAÇÕES, DANOS OU OUTRA RESPONSABILIDADE, SEJA EM AÇÃO DE CONTRATO, OU OUTRA FORMA, DECORRENTE DE, FORA DE OU EM CONEXÃO COM O SOFTWARE OU O USO DE OUTROS PROGRAMAS.
+															</textarea><br />
+															<div class="checkbox">
+																<label for="frm_cad_edu_aceita_termo">
+																	<input type="checkbox"  id="frm_cad_edu_aceita_termo" title="Para se cadastar, é necessário aceitar o termo de responsabilidade" required name="frm_aceita_termo" />
+																	Aceito o Termo de Responsabiliddade de Uso.
+																</label>
+															</div>
+															
+								
+							</div>
+							<button type="button" class="btn btn-success" id="btn_cad_edu">Cadastrar &gt;&gt;</button>
+						</form> 
+					</div>
+				</div>
+			</div>
+
+			<div>Precisa de ajuda, <a href="../ajuda/professor.html" target="_blank">clique aqui.</a></div>
+		</div>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="modal_msg" role="dialog">
+			<div class="modal-dialog">
+				<!-- Conteúdo-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">×</button>
+						<h4 class="modal-title">Atenção</h4>
+					</div>
+					<div class="modal-body">
+						<p id="msg_usuario"></p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="Fábio N. N. D.">
+<!--     JQuery e Bootstrap
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		
+-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+		<!-- Scripts e Estilos locais -->
+		<link rel="stylesheet" href="../estilo/global.css" />
+		<link rel="stylesheet" href="estilo/pag01a.css">
+		<script src="../scriptsComuns/config.js"></script>
+		<script src="../scriptsComuns/utilidades.js"></script>
+		<script src="../scriptsComuns/Mapa.js"></script>
+		<script src="../scriptsComuns/Lugar.js"></script>
+		<script src="../scriptsComuns/Usuario.js"></script>
+		<script src="../scriptsComuns/Jogador.js"></script>
+		<script src="../scriptsComuns/Educador.js"></script>
+		<script src="script/pag01a.js"></script>
+
+		<!-- Bibliotecas Open layers -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
+		<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+		<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,URL"></script>
+
+		<title>Rimor App</title>
+	</head>
+	<body class="">
+		<nav class="navbar navbar-inverse" style="background-color: #00004d;">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#barra_nav_menu" style="background-color: #00004d;">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>                        
+				</button>
+				<span class="navbar-brand">Rimor App</span>
+			</div>
+			<div class="collapse navbar-collapse" id="barra_nav_menu">
+				<ul class="nav navbar-nav navbar">
+					<li class="active"><a href="pag01.html" id="op1" style="background-color: #00004d;" class="opcoes_menu">Meus Mapas</a></li>
+					<li class="active"><a href="pag02.html" id="op2" style="background-color: #00004d;" class="opcoes_menu">Adicionar Mapa</a></li>
+					<li class="active"><a href="../ajuda/professor.html" target="_blank" style="background-color: #00004D;" class="opcoes_menu">Preciso de Ajuda</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+				<!--	<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
+					<li><a href="#" id="link_sair">Sair</a></li>
+				</ul>
+			</div>
+		</div>	
+		</nav>
+		<div class="container">
+			<h1>Gerenciador de mapa</h1>
+
+			<span id="span_msg_usuario">Aguarde enquanto as informações do mapa são processadas</span>
+			<!-- Formulário de ADM-->
+			<div class="row">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-5">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" style="text-align: center;" id="">
+								Informações Gerais
+							</h4>
+						</div>
+						<div class="panel-body">
+							<form action="" id="frm1a" accept-charset="utf-8">
+								<div class="form-group">
+									<label for="frm1_nome">Nome:</label>
+									<div class="input-group">
+										<input type="text" class="form-control" id="frm1_nome" value="" disabled />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="frm1_link">Id do mapa:</label>
+									<div class="input-group">
+										<input type="text" class="form-control" id="frm1_link" value="" readonly />
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>		
+				</div>
+				<div class="col-sm-5">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" style="text-align: center;" id="">
+							  Controle de Acesso ao Mapa
+							</h4>
+						</div>
+						<div class="panel-body">
+							<button type="button" class="btn btn-success btn-block" id="frm1_btn_libera_sim" disabled>Liberar para<br />cadastro de jogadores</button><br />
+							<p id="p_msg1" style="display:none;">Ao liberar o mapa, os dados dos jogadores anteriores serão excluídos.</p>
+							<button type="button" class="btn btn-success btn-block" id="frm1_btn_jogar_sim" disabled>Iniciar Disputa</button><br />
+							<button type="button" class="btn btn-danger btn-block" id="frm1_btn_libera_nao" disabled>Bloquear Acesso ao Mapa</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-1"></div>
+			</div>
+			<!-- Mapa -->
+			<div class="row secao-pagina">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-10 secao-pagina">
+					<br /><div id="div_mapa" style="border: 1px solid black; width:100%; height:50vh;"></div><br /><br />
+				</div>
+				<div class="col-sm-1"></div>
+			</div>
+			<!-- Jogadores -->
+			<div class="row secao-pagina">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-10">Jogadores:<br />
+					<div id="div_jogadores" class="table-responsive">
+						<table class="table" id="tabela_jogadores">
+							<thead>
+								<th>Nome</th>
+								<th>Lugares</th>
+								<th>Pontos</th>
+								<th>Duração</th>
+								<th>Estado</th>
+							</thead>
+							<tbody id="tabela_jogadores_dados"></tbody>
+						</table><br />
+						<p>Legenda campo Estado:<br /><br />A - Ativo<br />D - Desistente<br />E - Em espera<br />C - Concluiu o Jogo</p>
+					</div>
+				</div>
+				<div class="col-sm-1"></div>
+			</div>
+			<!-- Lugares -->
+			<div class="row secao-pagina">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-10">Lugares:<br />
+					<div id="div_lugares" class="table-responsive">
+						<table class="table" id="tabela_lugares">
+							<thead>
+								<th>Lugar</th>
+								<th>Pontos</th>
+								<th>Dica</th>
+								<th>Dica Extra</th>
+							</thead>
+							<tbody id="tabela_lugares_dados"></tbody>
+						</table>
+					</div>
+				</div>
+				<div class="col-sm-1"></div>
+			</div>		
+			
+		</div>
+		<div id="div_modelo" style="display:none;">
+			<table class="table" id="tabela_jogadores_modelo">
+				<thead id="tabela_jogadores_cab_modelo">
+					<th>Nome</th>
+					<th>Lugares</th>
+					<th>Pontos</th>
+					<th>Duração</th>
+					<th>Estado</th>
+				</thead>
+				<tbody id="tabela_jogadores_dados_modelo">
+					<tr>
+						<td>@@nome@@</td>
+						<td>@@lugares@@</td>
+						<td>@@pontos@@</td>
+						<td>@@duracao@@</td>
+						<td>@@estado@@</td>
+					</tr>
+				</tbody>
+			</table>
+			<table class="table" id="tabela_lugares_modelo">
+				<thead id="tabela_lugares_cab_modelo">
+					<th>Lugar</th>
+					<th>Pontos</th>
+					<th>Dica</th>
+					<th>Dica Extra</th>
+				</thead>
+				<tbody id="tabela_lugares_dados_modelo">
+					<tr>
+						<td>@@lugar@@</td>
+						<td>@@pontos@@</td>
+						<td>@@dica1@@</td>
+						<td>@@dica2@@</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		 <!-- Modal -->
+		<div class="modal fade" id="modal_msg" role="dialog">
+			<div class="modal-dialog">
+				<!-- Conteúdo-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">×</button>
+						<h4 class="modal-title">Atenção</h4>
+					</div>
+					<div class="modal-body">
+						<p id="msg_usuario"></p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="script/openlayers-mapa.js"></script>
+</html>

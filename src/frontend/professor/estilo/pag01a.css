@@ -1,0 +1,22 @@
+/*Configurações Gerais*/
+body{
+    background-position: center top;
+}
+
+.secao-pagina {
+    background-color: white;
+}
+
+.panel-title {
+    text-align:center;
+}
+
+/*Caixa de controle de acesso*/
+#frm1a div {
+    width:100%;
+}
+
+#p_msg1 {
+    margin-top: 1em;
+    display:none;
+}

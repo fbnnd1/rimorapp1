@@ -1,0 +1,21 @@
+body{
+    background-position: center top;
+}
+
+#frm_acesso_mapa, #frm_login_jogador, #div_msg_usuario {
+    background-color: white;
+
+    padding: 1em;
+}
+
+.estilo1 {
+    background-color: white;
+}
+
+#frm_login_jogador {
+    display: none;
+}
+
+#link_sair_menu {
+    visibility: hidden;
+}

@@ -1,0 +1,35 @@
+
+.div_comp_mapa, .estilo1 {
+    background-color: white;
+}
+
+/*Mapa*/
+#div_mapa {
+    width:100%;
+    border:1px solid cadetblue;
+    height:80vh;
+}
+
+.div-row-form {
+    margin-top:1em;
+    margin-bottom:1em;
+    background-color: white;
+}
+
+/*Informações do lugar */
+#div_info_lugar {
+    display:none;
+    background-color: white;
+}
+
+/*div do botão para finalizar adição de lugar */
+#div_btn_fim_adMapa {
+    display:none;
+    background-color: white;
+}
+
+/* Segundo formulário */
+.div-row-form2 {
+    display:none;
+    background-color: white;
+}

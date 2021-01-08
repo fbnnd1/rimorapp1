@@ -1,0 +1,12 @@
+body {
+    background-image: url('fundo.png');
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+nav.navbar {
+    background-color: #00004d;
+    border-radius: 0%;
+}

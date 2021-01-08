@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="Fábio N. N. D.">
+		<!-- Bootstrap e JQuery
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		
+		-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<!-- Scripts e Estilos locais -->
+		<link rel="stylesheet" href="../estilo/global.css" />
+		<link rel="stylesheet" href="estilos/painel.css" />
+		<script src="../scriptsComuns/config.js"></script>
+		<script src="../scriptsComuns/utilidades.js"></script>
+        <script src="../scriptsComuns/Usuario.js"></script>
+        <script src="../scriptsComuns/Jogador.js"></script>
+		<script src="../scriptsComuns/Mapa.js"></script>
+		<script src="../scriptsComuns/Lugar.js"></script>
+		<script src="scripts/painel.js"></script>
+		<!-- Bibliotecas Open layers -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
+		<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+		<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,URL"></script>
+
+		<title>Rimor App</title>
+	</head>
+	<body class="">
+		<nav class="navbar navbar-inverse" style="background-color: #00004d;border-radius:0;">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#barra_nav_menu" style="background-color: #00004d;">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>                        
+					</button>
+					<span class="navbar-brand" id="span_logo">Rimor App</span>
+				</div>
+				<div class="collapse navbar-collapse" id="barra_nav_menu">
+					<ul class="nav navbar-nav navbar">
+						<li class="active"><a href="../ajuda/jogador.html" target="_blank" style="background-color: #00004D;" class="opcoes_menu">Preciso de Ajuda</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+					<!--	<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
+						<li><a href="#" id="link_sair">Sair</a></li>
+					</ul>
+				</div>
+			</div>	
+		</nav>
+		<div class="container fundo-branco">
+
+			<!-- Sumário -->
+			<div class="panel panel-info">
+				<div class="panel-heading">
+				  <h4 class="panel-title cabecalho-paineis" id="">
+					Sumário
+				  </h4>
+				</div>
+				
+				<div class="panel-body sumario-div">
+					<div class="sumario-secoes">
+						<div class="sumario-cab">Meus Lugares Encontrados</div>
+						<div class="sumario-valor" id="div_lugares">0</div>
+					</div>
+					<div class="sumario-secoes">
+						<div class="sumario-cab">Tempo de Jogo</div>
+						<div class="sumario-valor"id="div_tempo">00:00:00</div>
+					</div>
+					<div class="sumario-secoes">
+						<div class="sumario-cab">Meus Pontos Acumulados</div>
+						<div class="sumario-valor" id="div_pontos">0</div>
+					</div>
+				</div>
+
+				<div class="panel-footer">
+					<button type="button" id="btn_tabela_ranking" class="btn btn-primary btn-block">Exibir Ranking</button><br /><br />
+					<div id="div_jogadores" class="table-responsive">
+						<table class="table" id="tabela_jogadores">
+							<thead>
+								<th>Colocação</th>
+								<th>Jogador</th>
+								<th>Lugares Encontrados</th>
+								<th>Pontos Acumulados</th>
+							</thead>
+							<tbody id="tabela_jogadores_dados"></tbody>
+						</table>
+					</div><br />
+					<button type="button" id="btn_limpa_msg_ranking" class="btn btn-default">Limpar mensagens</button>
+					<div id="div_msg_ult_jogadores"></div>
+				</div>
+			</div>
+
+			<!-- Mapa -->
+			<div class="panel panel-success">
+				<div class="panel-heading">
+				  <h4 class="panel-title cabecalho-paineis" id="">
+					Mapa
+				  </h4>
+				  <div class="" id="div_desc_mapa"></div>
+				</div>
+				
+				<div class="panel-body">
+					<div class="painel-mapa">
+						<button type="button" id="btn_mostra_dica" class="btn btn-primary btn-block">Mostrar Dica</button>
+						<div class="" id="div-dica"></div>
+						<button type="button" id="btn_exb_lugares" class="btn btn-default btn-block">Ocultar/Exibir informações dos lugares</button>
+						<div class="" id="div-info-lugar"></div>
+					</div>
+					<div class="painel-mapa">
+						<div id="div_mapa" class="map-container"></div>&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">Open Street Map</a> contributors.<br /><br />
+					</div>
+				</div>
+
+				<div class="panel-footer div-botoes-mapa">
+					<button class="btn btn-success" type="button" id="btn-marcar" disabled>Marcar lugar</button>
+					<button class="btn btn-primary" type="button" id="btn-palpitar" disabled>Enviar Palpite</button>
+				</div>
+			</div>
+
+			<!-- Mágicas -->
+			<div class="panel panel-warning">
+				<div class="panel-heading">
+				  <h4 class="panel-title cabecalho-paineis" id="">
+					Magias
+				  </h4>
+				</div>
+				
+				<div class="panel-body">
+					<div id="div-texto-magia"></div>
+					<div>
+						<button class="btn btn-primary btn-block btn-magia" type="button" id="btn-f1" disabled>Qual distância do início</button>
+						<p>Com esta mágia descubra a distância em Km do lugar a descobrir em relação ao ponto de início. Custo 2 pontos.</p>
+					</div>
+					<div>
+						<button class="btn btn-primary btn-block btn-magia" type="button" id="btn-f2" disabled>Revelar lugar</button>
+						<p>Com esta mágia o lugar procurado ficará visível por 30 segundos ou quando clicar no botão Marcar Lugar. Custo 5 pontos.</p>
+					</div>
+					<div>
+						<button class="btn btn-primary btn-block btn-magia" type="button" id="btn-f3" disabled>Dica Extra</button>
+						<p>Com esta mágia é revelada uma dica extra. <strong>Cuidado! Se não existir dica extra, você perderá 5 pontos.</strong></p>
+					</div>
+					<div class="div_caixa_magia4">
+						<div class="div_magia4">Congelar.</div>
+						Com esta mágia, você pode congelar o painel de um adversário clicando no nome dele abaixo. Custo 10 pontos.
+						<div id="div_botes_magia4">
+							
+							
+						</div>
+					</div>
+				</div>
+
+				
+			</div>
+			
+					
+
+			
+        </div>
+        
+		<div id="div_modelo" style="">
+			<table class="table" id="tabela_jogadores_modelo">
+				<thead id="tabela_jogadores_cab_modelo">
+					<th>Posição</th>
+					<th>Nome</th>
+					<th>Lugares</th>
+					<th>Pontos</th>
+				</thead>
+				<tbody id="tabela_jogadores_dados_modelo">
+					<tr class="dados_ranking">
+						<td>@@posicao@@</td>
+						<td>@@nome@@</td>
+						<td>@@lugares@@</td>
+						<td>@@pontos@@</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="div_btn_magia4_modelo">
+				<button class="btn btn-info btn-block btn-magia" type="button" id="" disabled onclick="enfeiticar_adversario('@@Nome@@', this);">@@Nome@@</button>
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="modal_msg" role="dialog">
+			<div class="modal-dialog">
+				<!-- Conteúdo-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">×</button>
+						<h4 class="modal-title">Atenção</h4>
+					</div>
+					<div class="modal-body">
+						<p id="msg_usuario"></p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal mágia 4 -->
+		<div class="modal fade" id="modal_msg_magia4" role="dialog">
+			<div class="modal-dialog">
+				<!-- Conteúdo-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Seu painel foi congelado!</h4>
+					</div>
+					<div class="modal-body">
+						<p id="div_msg_jogador_magia4"></p>
+					</div>
+					<div class="modal-footer">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="scripts/openlayers-mapa.js"></script>
+</html>

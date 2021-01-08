@@ -1,0 +1,9 @@
+.cabecalho-forms {
+    text-align: center;
+    cursor: pointer;
+}
+
+
+#div_cad_nova_senha, #btn_recup_cad_senha {
+    display: none;
+}
