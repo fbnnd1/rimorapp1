@@ -55,16 +55,55 @@ Jogabilidade básica (UML: Diagrama de Atividades)
 
 ![Jogabilidade básica](img/modelos/drg-atividades.jpg)
 
+## Telas
+
+### Educador
+
+Login
+
+![Tela de Login](src/frontend/ajuda/img-edu/img01.png)
+
+![Tela de Login](src/frontend/ajuda/img-edu/img06.png)
+
+Listas de mapas criados
+
+![Lista de mapas](src/frontend/ajuda/img-edu/img07.png)
+
+Gerenciamento do mapa
+
+![Detalhes de um mapa](img/telas-educador/img20.png)
+
+Criação de mapas
+
+![Tela de criação de mapa](img/telas-educador/img09.png)
+
+![Tela de criação de mapa](src/frontend/ajuda/img-edu/img12.png)
+
+### Jogador
+
+Tela de acesso ao mapa.
+
+![Tela de acesso ao mapa](src/frontend/ajuda/img-jog/img02.png)
+
+Painel do Jogador
+
+![Painel do Jogador](src/frontend/ajuda/img-jog/img05.png)
+
+### Observações
+
+* Dependendo do tamanho da tela do dispositivo usado, a disposição dos elementos pode variar;
+* Para visualizar mais telas, veja os manuais do educador e jogador.
+
 ## Arquitetura do sistema
 
 O sistema foi construído em camadas, onde cada camada pode trocar informações apenas com as camadas adjacentes.
 
 <table>
-    <tr style="background-color: #e6eeff;text-align:center;"><td>Visão</td></tr>
-    <tr style="background-color: #b3ccff;text-align:center;"><td>Controle</td></tr>
-    <tr style="background-color: #80aaff;text-align:center;"><td>Modelo</td></tr>
-    <tr style="background-color: #4d88ff;text-align:center;"><td>Funções Web</td></tr>
-    <tr style="background-color: #1a66ff;text-align:center;"><td>Dados</td></tr>
+    <tr><td style="background-color:#e6eeff;text-align:center;">Visão</td></tr>
+    <tr><td style="background-color:#b3ccff;text-align:center;">Controle</td></tr>
+    <tr><td style="background-color:#80aaff;text-align:center;">Modelo</td></tr>
+    <tr><td style="background-color:#4d88ff;text-align:center;">Funções Web</td></tr>
+    <tr><td style="background-color: #1a66ff;text-align:center;">Dados</td></tr>
 </table>
 
 **Visão**: Possui os componentes que formam as telas mostradas para o usuário;  
@@ -84,11 +123,9 @@ Para os mapa geográficos e funções de geoprocessamento foram usados recursos 
 
 **Backend**: PHP e banco de dados Mysql.
 
-## Jogabilidade e Telas
+## Jogabilidade e outras informações
 
-Para mais informações sobre criação de mapas, monitoramentos de jogadores, jogabilidade, entre outras informações, veja os manuais do educador e aluno.
-
-As telas do sistema estão contidas nesses manuais.
+Para mais informações sobre criação de mapas, monitoramentos de jogadores, jogabilidade, entre outras informações, veja os manuais do professor e jogador.
 
 ## Organização do diretório 'src'
 
