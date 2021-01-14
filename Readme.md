@@ -1,4 +1,4 @@
-# Rimor
+# Rimor App
 
 ## Descrição do Projeto
 
@@ -6,7 +6,7 @@ A proposta deste projeto é ser uma ferramenta alternativa para um educador da �
 
 ## Princípio de Funcionamento do Jogo
 
-O jogo têm o princípio de funcionalidade baseada no jogo de 'caça ao tesouro', onde o jogador se guia por um roteiro descrito em um mapa para chegar no tesouro que é seu objetivo. No Rimor o objetivo do jogador é chegar **no final do percurso no menor tempo possível**.
+O jogo têm o princípio de funcionalidade baseada no jogo de 'caça ao tesouro', onde o jogador se guia por um roteiro descrito em um mapa para chegar no tesouro que é seu objetivo. No Rimor App o objetivo do jogador é chegar **no final do percurso no menor tempo possível**.
 
 O educador montaria um roteiro, mapa, com lugares históricos e dicas sobre esses lugares para serem visualizadas pelos jogadores. Após a conclusão da montagem, ele divulgaria entre seus alunos uma identificação do mapa para eles acessarem.  
 
@@ -14,8 +14,8 @@ O Jogador ao acessar o mapa, de acordo com a dica cadastrada pelo professor na c
 
 ## Considerações Importantes
 
-O Rimor foi desenvolvido com ferramentas gratuitas e com o intuito de adequar-se a maioria dos planos de hospedagem de sites grátis disponíveis para não gerar custos as entidades educacionais e/ou profissionais de educação. Esses planos geralmente dispões de serviços de banco de dados Mysql e PHP.  
-O Rimor foi testado no plano de hospedagem gratuita oferecido pela **[000webhost](https://br.000webhost.com)**.
+O Rimor App foi desenvolvido com ferramentas gratuitas e com o intuito de adequar-se a maioria dos planos de hospedagem de sites grátis disponíveis para não gerar custos as entidades educacionais e/ou profissionais de educação. Esses planos geralmente dispões de serviços de banco de dados Mysql e PHP.  
+O Rimor App foi testado no plano de hospedagem gratuita oferecido pela **[000webhost](https://br.000webhost.com)**.
 
 ## Modelo de Negócio (UML: Diagrama de Classes)
 
@@ -67,9 +67,9 @@ O sistema foi construído em camadas, onde cada camada pode trocar informações
     <tr style="background-color: #1a66ff;text-align:center;"><td>Dados</td></tr>
 </table>
 
-**Visão**: Possui os componentes que formam as telas mostradas para o usuário;
-**Controle**: Possui programas que tratam as ações e interações do usuário com a tela;
-**Modelo**: Contém a codificação dos objetos do sistema, responsáveis por tratar os dados conforme as solicitações dos usuários;
+**Visão**: Possui os componentes que formam as telas mostradas para o usuário;  
+**Controle**: Possui programas que tratam as ações e interações do usuário com a tela;  
+**Modelo**: Contém a codificação dos objetos do sistema, responsáveis por tratar os dados conforme as solicitações dos usuários;  
 **Funções Web**: Responsável fazer a comunicação entre a camada de dados e a camada de modelo;
 **Dados**: Fornece e guarda os dados do sistema.
 
@@ -80,12 +80,20 @@ O sistema foi construído em camadas, onde cada camada pode trocar informações
 ## Tecnologias utilizadas
 
 **Frontend**: HTML, CSS e Javascript. Emprego de Bootstrap 3 e JQuery.  
+Para os mapa geográficos e funções de geoprocessamento foram usados recursos do [OpenStreetMap](https://www.openstreetmap.org/).
+
 **Backend**: PHP e banco de dados Mysql.
+
+## Jogabilidade e Telas
+
+Para mais informações sobre criação de mapas, monitoramentos de jogadores, jogabilidade, entre outras informações, veja os manuais do educador e aluno.
+
+As telas do sistema estão contidas nesses manuais.
 
 ## Organização do diretório 'src'
 
-backend: Pasta com o código PHP da camada 'Funções'.  
-bd: Pasta com arquivo SQL para criação da estrutura de dados.  
+**backend**: Pasta com o código PHP da camada 'Funções Web'.  
+**bd**: Pasta com arquivo SQL para criação da estrutura de dados.  
 
 **frontend**
 
@@ -94,3 +102,46 @@ bd: Pasta com arquivo SQL para criação da estrutura de dados.
 * scriptsComuns: Arquivos javascript que podem ser usados por todas as páginas.
 * professor: Arquivos que compõe as telas do sistema disponíveis para o professor.
 * jogador: Arquivos que compõe as telas do sistema disponíveis para os jogadores.
+
+## Implementação do Rimor App (Deploy).
+
+### Requisistos
+
+* Servidor HTTP com PHP;
+    *  O PHP deve ter suporte ao PDO e Mysql.
+* Servidor de banco de dados MYSQL.
+
+### Instruções de implementação
+
+Após a obtenção de um domínio(no caso para uso na Internet) e servidor para hospedagem do sistema com suporte a PHP, site, realize as seguintes etapas:
+
+1. Na ferramenta de admnistração do banco de dados Mysql, execute os comandos SQL contido no arquivo 'rimorappbd.sql';
+
+2. No arquivo 'conexao.php' salvo na pasta backend, coloque as informações de acesso ao banco de dados;
+
+Exemplo:
+
+```php
+
+$usuario = "rimor";
+$senha   = "rimor123";
+$url     = "localhost";
+$porta   = "3306";
+$bd      = "nomedobancodedados";
+
+```
+
+3. Salve os arquivos PHP dentro de uma pasta no servidor HTTP acessível pela Internet ou Intranet; 
+
+4. No arquivo 'config.js' salvo na pasta 'scriptsComuns', atribua o valor da variável 'str_url_base' o endereço web das pastas onde estão salvas os arquivos PHP;
+
+Exemplo:
+
+```javascript
+str_url_base = 'http://dominio.com.br/rimor/funcoes';
+
+```
+
+5. Salve os arquivos correspondentes ao front-end, matenha a estrutura de diretório da pasta, em outra pasta no servidor de hospedagem.
+
+Para averiguar se o processo de implementação foi concluído com sucesso, acesse a tela inicial do professor e tente realizar seu cadastro.
