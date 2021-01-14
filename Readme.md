@@ -75,7 +75,7 @@ O sistema foi construído em camadas, onde cada camada pode trocar informações
 
 ### Fluxo de informações entre as camadas
 
-![Modelo de Negócio](img/modelos/arq-sist.jpg)
+![Arquitetura do sistema](img/modelos/arq-sist.jpg)
 
 ## Tecnologias utilizadas
 
