@@ -2,6 +2,8 @@
 
 create database rimorappdb;
 
+use rimorappdb;
+
 create table tbl_educador (
 	login varchar(50) not null primary key,
     senha varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci not null,
