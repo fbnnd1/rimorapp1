@@ -102,10 +102,10 @@ Falha no servidor de banco de dados(conexão ou procedimentos).
 Todas as funções PHP retornam uma string no formato Json como resposta as solicitações feitas pelos objetos.  
 Essa string possui a chave 'ctrl' que contém um número inteiro que indica se a solicitação foi realizada com sucesso ou não conforme mostrado na tabela abaixo:  
 
-Código|Descrição
-------|---------
-0|Solicitação efetuada com sucesso 
->= 1|Ocorreu algum erro no processamento da solicitação. Esse erro pode ser de banco de dados ou outros quaisquer.
- -10|Não foi possível criar ou recuperar a sessão.
- -11|Tentou-se acessar um recurso sem realizar o procedimento de login
- -12|Não conseguiu acesso a base de dados.
+|Código|Descrição
+|------|---------
+|0|Solicitação efetuada com sucesso 
+|>= 1|Ocorreu algum erro no processamento da solicitação. Esse erro pode ser de banco de dados ou outros quaisquer.
+| -10|Não foi possível criar ou recuperar a sessão.
+| -11|Tentou-se acessar um recurso sem realizar o procedimento de login
+| -12|Não conseguiu acesso a base de dados.
