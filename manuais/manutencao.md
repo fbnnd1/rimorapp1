@@ -2,7 +2,88 @@
 
 ## Descrição
 
-Este manual tem o intuito de facilitar o processo de manutenção do Rimor App.
+Este manual tem o intuito de facilitar o processo de manutenção do Rimor App. O documento descreve algumas características do sistema para auxiliar a implementação de ações de manutenção e/ou correção de erros.
+
+## Fluxos de Informações
+
+Conforme descrito no Readme, o sistema possui arquitetura em camadas, sendo que cada camada troca dados apenas com as camadas adjacentes conforme ilustrado na figura abaixo:
+
+![Arquitetura do sistema](../img/modelos/arq-sist.jpg)
+
+Para facilitar a compreensão e possíveis manutenções no sistema relacionadas a esses fluxos, a seguir serão mostradas tabelas relacionando os métodos das classes disparados pelas páginas que os usuários interagem com os arquivos PHP mais as ações executadas pelo banco de dados.
+
+### Páginas para o Educador
+
+#### **index**
+
+Classe|Método da Classe|Arquivo PHP|Procedure ou Consulta do BD
+------|----------------|-----------|---------------------------
+Educador|efetua_login()|fl1.php|CALL login_educador(:login, :senha, @status);
+Educador|checa_cadastro_login()|f8_educador.php|CALL ve_cad_educador(:login, @status)
+Educador|"altera_senha(novasenha)"|f8_educador.php|CALL altera_senha_educador(:login, :senha)
+Educador|cad_educador_bd()|f8_educador.php|CALL cadastra_educador(:login, :senha, :nome, :email)
+
+#### **pag01**
+
+Classe|Método da Classe|Arquivo PHP|Procedure ou Consulta do BD
+------|----------------|-----------|---------------------------
+Mapa|atualiza_lista_mapas([], ultimo)|f3_edu.php|SELECT id, nome, descricao, link_id FROM tbl_mapa WHERE educador_login = 'educador' LIMIT ordem, 3;|
+Mapa|exclui_mapa_bd()|f7_edu.php|CALL exclui_mapa(:mapa_id, :mapa_linkid);|
+Usuario|sair()|fl3.php|------
+
+#### **pag01a**
+
+Classe|Método da Classe|Arquivo PHP|Procedure ou Consulta do BD
+------|----------------|-----------|---------------------------
+Mapa|obtem_jogadores()|f6_edu.php|SELECT jogador, pontos, qtde_lugates, duracao, estado FROM tbl_jogo WHERE mapa_id = 'mapaid' ORDER BY qtde_lugates DESC, pontos DESC, duracao ASC ;
+Mapa|obtem_info()|f4_edu.php|CALL obtem_info1_mapa(:id, @nome, @desc, @link, @estado);
+Mapa|obtem_info()|f4_edu.php|SELECT nome, latitude, longitude, pontos, dica1, dica2 FROM tbl_lugar WHERE mapa_id = :id ORDER BY ordem ASC
+Mapa|altera_estado(estado)|f5_edu.php|CALL altera_estado_mapa(:id, :estado);
+Mapa|altera_estado(estado)|f5_edu.php|CALL deleta_jogadores(:id);
+Usuario|sair()|fl3.php|------
+
+#### **pag02**
+
+Classe|Método da Classe|Arquivo PHP|Procedure ou Consulta do BD
+------|----------------|-----------|---------------------------
+Mapa|checa_nome()|f2_edu.php|CALL checa_nome_mapa(:nomemapa, :educador, @tot_mapa);
+Mapa|cadBd()|f1_edu.php|CALL insere_mapa(:educador, :nome, :desc);
+Mapa|cadBd()|f1_edu.php|CALL obtem_id_ult_mapa(:educador, @id_mapa);
+Mapa|cadBd()|f1_edu.php|CALL insere_lugar(:id_mapa, :lat, :lon, :nome, :dica1, :desc, :pontos, :ordem, :dica2 );
+Mapa|cadBd()|f1_edu.php|CALL cad_link_at_mapa(:id_mapa, :link_at_mapa);
+Usuario|sair()|fl3.php|------
+
+### Páginas para o Jogador
+
+#### **index**
+
+Classe|Método da Classe|Arquivo PHP|Procedure ou Consulta do BD
+------|----------------|-----------|---------------------------
+Mapa|obtem_estado()|f7_jogo.php|CALL obtem_estado_mapa(:mapa_id, @estado);
+Jogador|altera_estado(estado, mapaid)|f6_jogo.php|CALL altera_estado_jogador(:jogador, :mapa, :estado);
+Jogador|entrar_jogo(mapa)|fl2.php|CALL login_jogador(:mapa_id, @status);
+Jogador|checa_nome(mapa_id)|f4_jogo.php|CALL checa_nome_jogador(:nomej, :mapa_id, @status);
+Jogador|checa_nome(mapa_id)|f4_jogo.php|CALL cad_nome_jogador(:nomej, :mapa_id)
+Usuario|sair()|fl3.php|------
+
+#### **painel**
+
+Classe|Método da Classe|Arquivo PHP|Procedure ou Consulta do BD
+------|----------------|-----------|---------------------------
+Mapa|obtem_estado()|f7_jogo.php|CALL obtem_estado_mapa(:mapa_id, @estado);
+Mapa|obtem_lugar_do_mapa(ordem)|f2_jogo.php|CALL obtem_id_mapa(:mapa_link_id, @id_mapa);
+Mapa|obtem_lugar_do_mapa(ordem)|f2_jogo.php|CALL obtem_lugar_jogo(:mapa_id, :ordem, @lat, @lon, @dica, @pontos, @desc, @dica_extra, @nome);
+Mapa|obtem_jogadores()|f6_edu.php|SELECT jogador, pontos, qtde_lugates, duracao, estado FROM tbl_jogo WHERE mapa_id = 'mapaid' ORDER BY qtde_lugates DESC, pontos DESC, duracao ASC ;
+Jogador|atualiza_dados_bd(mapa_id, opcao)|f5_jogo.php|CALL atualiza_dados_jogador1(:jogador, :mapa, :pontos, :lugares, :duracao);
+Jogador|atualiza_dados_bd(mapa_id, opcao)|f5_jogo.php|CALL atualiza_dados_jogador2(:jogador, :mapa, :duracao);
+Jogador|altera_estado(estado, mapaid)|f6_jogo.php|CALL altera_estado_jogador(:jogador, :mapa, :estado);
+Mapa|obtem_lugar_inicial()|f2_jogo.php|CALL obtem_id_mapa(:mapa_link_id, @id_mapa);
+Mapa|obtem_lugar_inicial()|f2_jogo.php|CALL obtem_lugar_jogo(:mapa_id, :ordem, @lat, @lon, @dica, @pontos, @desc, @dica_extra, @nome);
+Mapa|obtem_descricao()|f3_jogo.php|CALL obtem_descricao_mapa(:mapa_id, @descricao);
+Jogador|enfeiticar(nomeadversario, mapaid)|f8_jogo.php|CALL aplica_feitico_alvo(:jogador, :mapa, :adv, @status)
+Jogador|desenfeiticar(mapaid)|f8_jogo.php|CALL desfaz_feitico(:jogador, :mapa)
+Usuario|sair()|fl3.php|------
+
 
 ##  Estados dos objetos
 
@@ -15,8 +96,8 @@ O mapa no jogo possui os seguintes estados possíveis
 Estado|Letra|Descrição
 ------|----------------------|---------
 Incluso|I|Mapa está inativo(Não liberado para o jogo)
-Liberado|L|Mapa está liberado para uso dos jogadores. Jogadores ainda não estão jogando.
-Ativo|A|Os jogadores estão usando o mapa em uma partida
+Liberado|L|O mapa está liberado para uso dos jogadores. Os jogadores ainda não estão jogando.
+Ativo|A|Os jogadores estão usando o mapa em uma partida.
 
 **Relacionamento com o método *altera_estado()* da classe Mapa**
 
@@ -33,9 +114,9 @@ O jogador possui os seguintes estados:
 Estado|Letra|Descrição
 ------|----------------------|---------
 Espera|E|O jogador está aguardando a liberação do mapa para jogar.
-Desistente|D|O jogador dessitiu do mapa ou da partida.
+Desistente|D|O jogador desistiu do mapa ou da partida.
 Ativo|A|O jogador está jogando.
-Concluinte|C|O Jogador achou todos os lugares do mapa.  
+Concluinte|C|O jogador achou todos os lugares do mapa.  
 
 ## Códigos de erros
 
@@ -44,7 +125,7 @@ Concluinte|C|O Jogador achou todos os lugares do mapa.
 Código|Erro|Objeto|Tela|
 -----|-----|------|----
 CS01|Erro de comunicação com o servidor|TODOS|TODAS
-CS02|Não consegiui acessar o servidor|TODOS|TODAS
+CS02|Não conseguiu acessar o servidor|TODOS|TODAS
 AM01|Falha no cadastro de novo mapa|Mapa|Adicionar Mapa
 AM02|Falha no acesso aos dados do servidor|Mapa|Adicionar Mapa
 MM01|Falha na obtenção dos mapas do educador|Mapa|Meus Mapas
@@ -77,8 +158,8 @@ Falha na comunicação com SGBD na obtenção de dados dos lugares e/ou identifi
 
 #### MM01
 
-Erro relacionado a administração do mapa. Pode indicar identificação do mapa corrompida ou erro de acesso de acesso.  
-Também pode indicar falha na obtenção na lista de mapas.  
+Erro relacionado a administração do mapa. Pode indicar identificação do mapa corrompida ou erro de acesso.  
+Também pode indicar falhas na obtenção na lista de mapas.  
 Páginas relacionadas: Meus Mapas e Gerenciador de Mapas.
 
 #### LJ01
@@ -99,7 +180,7 @@ Falha no servidor de banco de dados(conexão ou procedimentos).
 
 ### **Códigos retornados pelas funções PHP**
 
-Todas as funções PHP retornam uma string no formato Json como resposta as solicitações feitas pelos objetos.  
+Todas as funções PHP retornam uma string no formato Json como resposta às solicitações feitas pelos objetos.  
 Essa string possui a chave 'ctrl' que contém um número inteiro que indica se a solicitação foi realizada com sucesso ou não conforme mostrado na tabela abaixo:  
 
 |Código|Descrição
