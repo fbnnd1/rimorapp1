@@ -37,7 +37,7 @@ Classe|Método da Classe|Arquivo PHP|Procedure ou Consulta do BD
 ------|----------------|-----------|---------------------------
 Mapa|obtem_jogadores()|f6_edu.php|SELECT jogador, pontos, qtde_lugates, duracao, estado FROM tbl_jogo WHERE mapa_id = 'mapaid' ORDER BY qtde_lugates DESC, pontos DESC, duracao ASC ;
 Mapa|obtem_info()|f4_edu.php|CALL obtem_info1_mapa(:id, @nome, @desc, @link, @estado);
-Mapa|obtem_info()|f4_edu.php|SELECT nome, latitude, longitude, pontos, dica1, dica2 FROM tbl_lugar WHERE mapa_id = :id ORDER BY ordem ASC
+Mapa|obtem_info()|f4_edu.php|SELECT nome, latitude, longitude, pontos, dica1, dica2 FROM tbl_lugar WHERE mapa_id = 'mapaid' ORDER BY ordem ASC
 Mapa|altera_estado(estado)|f5_edu.php|CALL altera_estado_mapa(:id, :estado);
 Mapa|altera_estado(estado)|f5_edu.php|CALL deleta_jogadores(:id);
 Usuario|sair()|fl3.php|------

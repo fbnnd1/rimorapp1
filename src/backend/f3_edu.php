@@ -8,9 +8,10 @@ date_default_timezone_set("America/Sao_Paulo");
 checa_login();
 
 $pg = $_GET['pg'];
+$pg_int = (int)$pg;
 
 //SQL
-$str_sql = "SELECT id, nome, descricao, link_id FROM tbl_mapa WHERE educador_login = '" . $_SESSION["educador"] .  "' LIMIT $pg, 3;";
+$str_sql = "SELECT id, nome, descricao, link_id FROM tbl_mapa WHERE educador_login = :educador LIMIT " . (string)$pg_int . ", 3;";
 
 require("conexao.php");
 
@@ -19,7 +20,8 @@ $stmt = null;
 try {
  
 	$stmt = $obj_bd->prepare($str_sql);
-	
+    $stmt->bindParam(":educador", $_SESSION["educador"] );
+    
     $bol_sucesso = $stmt->execute();
     $resultado = $stmt->fetchAll();
 	$stmt->closeCursor();

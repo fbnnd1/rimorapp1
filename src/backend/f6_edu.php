@@ -10,7 +10,7 @@ checa_login();
 $str_mapa_linkid = $_GET['mapa'];
 
 //SQL
-$str_sql = "SELECT jogador, pontos, qtde_lugates, duracao, estado FROM tbl_jogo WHERE mapa_id = '" . $str_mapa_linkid . "' ORDER BY qtde_lugates DESC, pontos DESC, duracao ASC ;"; 
+$str_sql = "SELECT jogador, pontos, qtde_lugates, duracao, estado FROM tbl_jogo WHERE mapa_id = :p_mapaid ORDER BY qtde_lugates DESC, pontos DESC, duracao ASC ;"; 
 
 require("conexao.php");
 
@@ -18,8 +18,9 @@ require("conexao.php");
 $stmt = null;
 try {
  
-	$stmt = $obj_bd->prepare($str_sql);
-	
+    $stmt = $obj_bd->prepare($str_sql);
+    $stmt->bindParam(":p_mapaid", $str_mapa_linkid);
+    
     $bol_sucesso = $stmt->execute();
     $resultado = $stmt->fetchAll();
 	$stmt->closeCursor();
