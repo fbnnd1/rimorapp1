@@ -97,7 +97,7 @@ class Educador extends Usuario {
         return true; //Login existe
     }
 
-    altera_senha(str_senha) { //Checa existência de login
+    altera_senha(str_senha) { //Altera a senha de acesso
         var str_ret = "";
         var obj_ret = "";
 

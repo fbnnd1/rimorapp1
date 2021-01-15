@@ -64,7 +64,7 @@ $(document).ready(function () {
 	$("#frm1_btn_adMapa").click(function() {
 		var str_nome = $("#frm1_nome").val();
 		var str_dica = "";
-                var str_dica_extra = "";
+		var str_dica_extra = "";
 		var str_desc = "";
 		var int_pontos = 0;
 

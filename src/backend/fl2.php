@@ -27,7 +27,7 @@ try {
 		if ($resultado[0][0] == 1) {
 			
 			echo ("{\"ctrl\":0,\"url\":\"$url\"}");
-                        $_SESSION["jogador"] = $mapa_id;
+			$_SESSION["jogador"] = $mapa_id;
 
 		} else {
 			echo "{\"ctrl\":3}";

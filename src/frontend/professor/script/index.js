@@ -160,7 +160,7 @@ $(document).ready(function () {
         //Fazendo o cadastro
         var bol_r = obj_educador.cad_educador_bd();
 
-        if (!bol_r) { //Erro no cadastro da senha
+        if (!bol_r) { //Erro no cadastro
             alert(msg_usuario("gm2"));
             e.preventDefault();
             return;
