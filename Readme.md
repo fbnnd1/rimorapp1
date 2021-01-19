@@ -2,29 +2,29 @@
 
 ## Descrição do Projeto
 
-A proposta deste projeto é ser uma ferramenta alternativa para um educador da área de Geografia, História e/ou áreas afins possa apresentar para seus alunos lugares com valor histórico cultural quando eles estiverem impossibilitados de visitarem esses lugares. A apresentação desses lugares seria feita empregando-se o conceito de gamificação.
+A proposta deste projeto é ser uma ferramenta alternativa para um educador da área de Geografia, História e/ou áreas afins possa apresentar para seus alunos lugares com valor histórico cultural quando eles estiverem impossibilitados de visitar esses lugares. A apresentação desses lugares seria feita empregando-se o conceito de gamificação.
 
 ## Princípio de Funcionamento do Jogo
 
-O jogo têm o princípio de funcionalidade baseada no jogo de 'caça ao tesouro', onde o jogador se guia por um roteiro descrito em um mapa para chegar no tesouro que é seu objetivo. No Rimor App o objetivo do jogador é chegar **no final do percurso no menor tempo possível**.
+O jogo tem o princípio de funcionalidade baseada no jogo de 'caça ao tesouro', onde o jogador se guia por um roteiro descrito em um mapa para chegar no tesouro que é seu objetivo. No Rimor App o objetivo do jogador é chegar **no final do percurso no menor tempo possível**.
 
 O educador montaria um roteiro, mapa, com lugares históricos e dicas sobre esses lugares para serem visualizadas pelos jogadores. Após a conclusão da montagem, ele divulgaria entre seus alunos uma identificação do mapa para eles acessarem.  
 
-O Jogador ao acessar o mapa, de acordo com a dica cadastrada pelo professor na confecção do mapa, ele poderá palpitar se determinado lugar no mapa foi dermarcado pelo educador.
+O Jogador ao acessar o mapa, de acordo com a dica cadastrada pelo professor na confecção do mapa, ele poderá palpitar se determinado lugar no mapa foi demarcado pelo educador.
 
 ## Considerações Importantes
 
-O Rimor App foi desenvolvido com ferramentas gratuitas e com o intuito de adequar-se a maioria dos planos de hospedagem de sites grátis disponíveis para não gerar custos as entidades educacionais e/ou profissionais de educação. Esses planos geralmente dispões de serviços de banco de dados Mysql e PHP.  
+O Rimor App foi desenvolvido com ferramentas gratuitas e com o intuito de adequar-se à maioria dos planos de hospedagem de sites grátis disponíveis para não gerar custos às entidades educacionais e/ou profissionais de educação. Esses planos geralmente dispões de serviços de banco de dados Mysql e PHP.  
 O Rimor App foi testado no plano de hospedagem gratuita oferecido pela **[000webhost](https://br.000webhost.com)**.
 
 ## Modelo de Negócio (UML: Diagrama de Classes)
 
-![Modelo de Negócio](img/modelos/drg-classes.jpg)
+![Modelo de Negócio](img/sistema/drg-classes.jpg)
 
 * Educador: Usuário do sistema que cria e roteiriza mapas com lugares escolhidos por ele;
 * Mapa: Conjunto de lugares;
 * Lugar: Representação de um logradouro que possui valor(es) histórico-cultural(ais);
-* Jogador: Usuário que acessa mapa criado por um educador com intuito de descobrir quais lugares compõe o mapa e aprendendo sobre eles.
+* Jogador: Usuário que acessa mapa criado por um educador com intuito de descobrir quais lugares compõem o mapa e aprendendo sobre eles.
 
 ## Usuários
 
@@ -53,7 +53,7 @@ utilizando os mapas criados pelo educador. Geralmente possui facilidade em usar 
 
 Jogabilidade básica (UML: Diagrama de Atividades)
 
-![Jogabilidade básica](img/modelos/drg-atividades.jpg)
+![Jogabilidade básica](img/sistema/drg-atividades.jpg)
 
 ## Telas
 
@@ -61,13 +61,13 @@ Jogabilidade básica (UML: Diagrama de Atividades)
 
 Login
 
-![Tela de Login](src/frontend/ajuda/img-edu/img01.png)
+![Tela de Login](img/telas-educador/img01.png)
 
-![Tela de Login](src/frontend/ajuda/img-edu/img06.png)
+![Tela de Login](img/telas-educador/img06.png)
 
 Listas de mapas criados
 
-![Lista de mapas](src/frontend/ajuda/img-edu/img07.png)
+![Lista de mapas](img/telas-educador/img07.png)
 
 Gerenciamento do mapa
 
@@ -77,17 +77,17 @@ Criação de mapas
 
 ![Tela de criação de mapa](img/telas-educador/img09.png)
 
-![Tela de criação de mapa](src/frontend/ajuda/img-edu/img12.png)
+![Tela de criação de mapa](img/telas-educador/img12.png)
 
 ### Jogador
 
 Tela de acesso ao mapa.
 
-![Tela de acesso ao mapa](src/frontend/ajuda/img-jog/img02.png)
+![Tela de acesso ao mapa](img/telas-jogador/img02.png)
 
 Painel do Jogador
 
-![Painel do Jogador](src/frontend/ajuda/img-jog/img05.png)
+![Painel do Jogador](img/telas-jogador/img05.png)
 
 ### Observações
 
@@ -98,23 +98,17 @@ Painel do Jogador
 
 O sistema foi construído em camadas, onde cada camada pode trocar informações apenas com as camadas adjacentes.
 
-<table>
-    <tr><td style="background-color:#e6eeff;text-align:center;">Visão</td></tr>
-    <tr><td style="background-color:#b3ccff;text-align:center;">Controle</td></tr>
-    <tr><td style="background-color:#80aaff;text-align:center;">Modelo</td></tr>
-    <tr><td style="background-color:#4d88ff;text-align:center;">Funções Web</td></tr>
-    <tr><td style="background-color: #1a66ff;text-align:center;">Dados</td></tr>
-</table>
+![Arquitetura do sistema simplificada](img/sistema/arq-sist-simples.png)
 
 **Visão**: Possui os componentes que formam as telas mostradas para o usuário;  
 **Controle**: Possui programas que tratam as ações e interações do usuário com a tela;  
 **Modelo**: Contém a codificação dos objetos do sistema, responsáveis por tratar os dados conforme as solicitações dos usuários;  
-**Funções Web**: Responsável fazer a comunicação entre a camada de dados e a camada de modelo;
+**Funções Web**: Responsáve por fazer a comunicação entre a camada de dados e a camada de modelo;  
 **Dados**: Fornece e guarda os dados do sistema.
 
 ### Fluxo de informações entre as camadas
 
-![Arquitetura do sistema](img/modelos/arq-sist.jpg)
+![Arquitetura do sistema](img/sistema/arq-sist.jpg)
 
 ## Tecnologias utilizadas
 
@@ -123,9 +117,13 @@ Para os mapa geográficos e funções de geoprocessamento foram usados recursos 
 
 **Backend**: PHP e banco de dados Mysql.
 
+### Observações:
+
+Para poder manter uma maior compatibilidade com sistemas legados, como por exemplo o Internet Explorer 8, uma vez que é desconhecido o ambiente que o Rimor App será implementado, optou-se por fazer uso de tecnologias que possuem suporte a esses sistemas.
+
 ## Jogabilidade e outras informações
 
-Para mais informações sobre criação de mapas, monitoramentos de jogadores, jogabilidade, entre outras informações, veja os manuais do professor e jogador.
+Para mais informações sobre criação de mapas, monitoramentos de jogadores, jogabilidade, entre outras informações, veja os manuais do professor e do jogador.
 
 ## Organização do diretório 'src'
 
@@ -137,12 +135,12 @@ Para mais informações sobre criação de mapas, monitoramentos de jogadores, j
 * estilo: Arquivos para estilização comum entre as páginas;
 * ajuda: Manuais de ajuda do educador e aluno;
 * scriptsComuns: Arquivos javascript que podem ser usados por todas as páginas.
-* professor: Arquivos que compõe as telas do sistema disponíveis para o professor.
-* jogador: Arquivos que compõe as telas do sistema disponíveis para os jogadores.
+* professor: Arquivos que compõem as telas do sistema disponíveis para o professor.
+* jogador: Arquivos que compõem as telas do sistema disponíveis para os jogadores.
 
 ## Implementação do Rimor App (Deploy).
 
-### Requisistos
+### Requisitos
 
 * Servidor HTTP com PHP;
     *  O PHP deve ter suporte ao PDO e Mysql.
@@ -152,7 +150,7 @@ Para mais informações sobre criação de mapas, monitoramentos de jogadores, j
 
 Após a obtenção de um domínio(no caso para uso na Internet) e servidor para hospedagem do sistema com suporte a PHP, site, realize as seguintes etapas:
 
-1. Na ferramenta de admnistração do banco de dados Mysql, execute os comandos SQL contido no arquivo 'rimorappbd.sql';
+1. Na ferramenta de administração do banco de dados Mysql, execute os comandos SQL contido no arquivo 'rimorappbd.sql';
 
 2. No arquivo 'conexao.php' salvo na pasta backend, coloque as informações de acesso ao banco de dados;
 
@@ -179,6 +177,12 @@ str_url_base = 'http://dominio.com.br/rimor/funcoes';
 
 ```
 
-5. Salve os arquivos correspondentes ao front-end, matenha a estrutura de diretório da pasta, em outra pasta no servidor de hospedagem.
+5. Salve os arquivos correspondentes ao front-end, mantenha a estrutura de diretório da pasta, em outra pasta no servidor de hospedagem.
 
 Para averiguar se o processo de implementação foi concluído com sucesso, acesse a tela inicial do professor e tente realizar seu cadastro.
+
+## Considerações Finais
+
+Assim como todos os softwares, todos os aspectos do Rimor App descritos nesta documentação podem ser aprimorados e ou atualizados com emprego de novas tecnologias e melhores práticas. 
+Como descrito anteriormente, o principal objetivo desse projeto é ser uma ferramenta alternativa de ensino sobre lugares com algum valor cultural.  
+Esses lugares devem ser preservados e uma das melhores formas de preservação é através do ensino sobre a importância destas localidades.

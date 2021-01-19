@@ -10,7 +10,7 @@ Conforme descrito no Readme, o sistema possui arquitetura em camadas, sendo que 
 
 ![Arquitetura do sistema](../img/modelos/arq-sist.jpg)
 
-Para facilitar a compreensão e possíveis manutenções no sistema relacionadas a esses fluxos, a seguir serão mostradas tabelas relacionando os métodos das classes disparados pelas páginas que os usuários interagem com os arquivos PHP mais as ações executadas pelo banco de dados.
+Para facilitar a compreensão e possíveis manutenções no sistema relacionadas a esses fluxos, a seguir serão mostradas tabelas relacionando os métodos disparados pelos objetos das classes com as páginas que os usuários interagem mais os arquivos PHP mais as ações executadas pelo banco de dados.
 
 ### Páginas para o Educador
 
