@@ -55,6 +55,75 @@ Jogabilidade básica (UML: Diagrama de Atividades)
 
 ![Jogabilidade básica](img/sistema/drg-atividades.jpg)
 
+## Estrutura de Dados
+
+O Rimor App possui a seguinte estrutura de dados:
+
+### Tabela Educador (tbl_educador)
+
+Campo|Tipo|Descrição
+-----|----|---------
+login|Texto|Guarda nome, login de usuário.
+senha|Texto|Guarda senha do usuário.
+nome|Texto|Guarda o nome do educador.
+email|Texto|Guarda e-mail do educador.
+
+*Chave Primária*: Campo 'login'.
+
+### Tabela Mapa (tbl_mapa)
+
+Campo|Tipo|Descrição
+-----|----|---------
+id|Número Inteiro|Identifica o registro
+educador_login|Texto|Guarda o nome de usuário do criador do mapa.
+nome|Texto|Guarda nome do mapa.
+descricao|Texto|Guarda uma descrição do mapa.
+link_id|Texto|Id do mapa para que permite o acesso de jogadores.
+estado|Texto|Guarda o estado do mapa.
+
+*Chave Primária*: Campo 'id'.   
+*Chave Estrangeira*: Campo 'educador_login'.   
+
+**Observação**: Para saber mais sobre o estado do mapa, veja o manual de manutenção.
+
+### Tabela Lugar (tbl_lugar)
+
+Campo|Tipo|Descrição
+-----|----|---------
+mapa_id|Número Inteiro|Identifica o mapa que contém o lugar
+latitude|Texto|Guarda a latitude do lugar.
+longitude|Texto|Guarda a longitude do lugar.
+nome|Texto|Guarda nome do lugar.
+descricao|Texto|Guarda uma descrição do lugar. Campo usado para guardar informações relevantes sobre a localidade.
+dica1|Texto|Guarda uma dica para descobrir a localização do lugar no mapa.
+dica2|Texto|Guarda uma dica extra para descobrir a localização do lugar no mapa.
+pontos|Número Inteiro|A quantidade de pontos que vale a descoberta do lugar.
+ordem|Número Inteiro|A ordem do lugar no roteiro do mapa feito pelo educador.  
+
+*Chave Primária*: Campos 'mapa_id', 'latitude' e 'longitude'.   
+*Chave Estrangeira*: Campo 'mapa_id'.   
+
+### Tabela Jogo (tbl_jogo)
+
+Para viabilizar a jogabilidade e monitoramento dos jogadores, foi implementada uma tabela que guarda informações temporariamente.
+
+Campo|Tipo|Descrição
+-----|----|---------
+mapa_id|Texto|Identifica o mapa na qual será realizada uma disputa.
+jogador|Texto|Nome ou apelido do jogador na disputa.
+pontos|Número Inteiro|Quantidade de pontos do jogador.
+qtde_lugates|Número Inteiro|Quantidade de lugares que o jogador descobriu no mapa.
+estado|Texto|Estado de participação do jogador.
+duracao|Texto|Tempo de duração do jogo para o jogador.
+enfeiticado_por|Texto|Nome do adversário que bloqueou o jogador.
+
+*Chave Primária*: Campos 'mapa_id' e 'jogador'.  
+*Chave Estrangeira*: Campo 'mapa_id'.  
+
+**Observações**:   
+ - Para saber mais sobre o estado do jogador, veja o manual de manutenção;   
+ - Para um melhor desempenho devido as exclusões frequentes, não foi implementado no SQL de definição da estrutura da tabela uma chave primária e chave estrangeira.
+
 ## Telas
 
 ### Educador
