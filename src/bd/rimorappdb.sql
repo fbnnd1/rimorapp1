@@ -11,18 +11,15 @@ create table tbl_educador (
     nome varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci not null
 );
 
-INSERT INTO `tbl_educador` ( `login` , `senha`, `email`, `nome` )
-VALUES ('adm_educador', '$@educador1223', 'email@email.com', 'ADM EDUCADOR');
-
-
 create table tbl_mapa (
     id int NOT NULL AUTO_INCREMENT,
     educador_login varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci not null,
     nome varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci not null,
     descricao varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci,
     link_id VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-     `estado` CHAR( 1 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'I';
-    primary key (id)
+     `estado` CHAR( 1 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'I',
+    primary key (id),
+    CONSTRAINT FK_MapaEdu FOREIGN KEY (educador_login) REFERENCES tbl_educador(login)
  );
 
 CREATE TABLE tbl_lugar (
@@ -35,11 +32,12 @@ CREATE TABLE tbl_lugar (
     descricao varchar( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci,
     pontos int not null,
     ordem int not null,
-PRIMARY KEY ( mapa_id, latitude, longitude )
+    PRIMARY KEY ( mapa_id, latitude, longitude ),
+    CONSTRAINT FK_LugarMapa FOREIGN KEY (mapa_id) REFERENCES tbl_mapa(id)
 );
 
+/*Tabela com o intuito de armazenar informações temporárias*/
 CREATE TABLE tbl_jogo (
-    /*mapa_id int NOT NULL ,*/
     mapa_id VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
     jogador varchar( 30 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
     pontos int null  DEFAULT 0,
